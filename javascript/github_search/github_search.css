@@ -1,3 +1,7 @@
+body {
+  margin: 0px;
+}
+
 header {
   background-color: skyblue;
   font-size: x-large;
@@ -14,22 +18,125 @@ input {
   border: 1px solid #ccc;
   border-radius: 10px;
 }
+
+footer {
+  background-color: #ccc;
+  text-align: center;
+  padding: 32px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  padding: 16px 8px;
+  row-gap: 16px;
+}
+
 .alarm {
   color: white;
   background-color: red;
   padding: 8px;
-  margin-bottom: 8px;
   border-radius: 10px;
   display: none;
 }
 
 .search-box {
   border: 1px solid skyblue;
-  margin: 16px 0px;
   padding: 0px 12px;
   border-radius: 10px;
 }
 
 .search-box p {
   color: gray;
+}
+
+.result-box {
+  /* display:none; */
+  border: 1px;
+  border-radius: 10px;
+  background-color: aliceblue;
+  padding: 8px;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  column-gap: 16px;
+}
+.image-box {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+}
+.view-profile-button {
+  background-color: skyblue;
+  font-size: 16px;
+  color: white;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  padding: 8px 16px;
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+}
+
+.profile-image {
+  width: 240px;
+  height: 240px;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+.info-box {
+  width: 100%;
+}
+
+.labels,
+.repo-info {
+  display: flex;
+  column-gap: 8px;
+  flex-wrap: wrap;
+}
+.labels p,
+.repo-info p {
+  display: inline-block;
+  padding: 8px 12px;
+  margin: 4px 0px;
+  border-radius: 10px;
+  color: white;
+}
+.repos-label,
+.stars {
+  background-color: chocolate;
+}
+.gists-label,
+.watchers {
+  background-color: coral;
+}
+.followers-label,
+.forks {
+  background-color: darkgreen;
+}
+.following-label {
+  background-color: goldenrod;
+}
+
+.infos p {
+  border-top: 1px solid skyblue;
+  padding: 16px;
+  margin: 0px;
+}
+.infos p:last-child {
+  border-bottom: 1px solid skyblue;
+}
+.repos-list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  padding: 0px;
+}
+.repo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border: 1px solid skyblue;
 }
