@@ -17,7 +17,8 @@ label {
 
 input {
   display: block;
-  width: calc(100% - 26px);
+  width: 100%;
+  box-sizing: border-box;
   padding: 12px;
   margin-bottom: 24px;
   border: 1px solid #ccc;
