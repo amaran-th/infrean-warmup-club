@@ -4,19 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./book_list.css" type="text/css"></link>
-    <script type="text/javascript" src="./book_list.js"></script>
+    
     <title>책 리스트 나열 앱</title>
   </head>
   <body>
     <h1>책</h1>
-    <div className="alarm"></div>
-    <form>
+    <div class="alarm"></div>
+    <form onsubmit="return false;">
       <label for="bookName">책 이름</label>
       <input
         type="text"
         placeholder="책 이름"
         name="bookName"
-        className="bookName"
+        class="bookName"
         required
       />
       <label for="bookAuthor">책 저자</label>
@@ -24,27 +24,26 @@
         type="text"
         placeholder="책 저자"
         name="bookAuthor"
-        className="bookAuthor"
+        class="bookAuthor"
         required
       />
-      <button type="submit">제출</button>
+      <button class="submitButton" type="submit"><b>제출</b></button>
     </form>
 
     <table>
       <thead>
         <tr>
+          <th>순번</th>
           <th>책 이름</th>
           <th>책 저자</th>
           <th>삭제</th>
         </tr>
       </thead>
       <tbody class="bookItems">
-        <tr>
-          <td className="bookName"></td>
-          <td className="bookAuthor"></td>
-          <td><button>삭제</button></td>
-        </tr>
+        
       </tbody>
     </table>
-  </body>
-</html>
+    </body>
+    <script type="text/javascript" src="./book_list.js"></script>
+  
+  </html>
