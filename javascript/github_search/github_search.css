@@ -1,0 +1,35 @@
+header {
+  background-color: skyblue;
+  font-size: x-large;
+  color: white;
+  padding: 16px;
+}
+
+input {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  margin-bottom: 24px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+.alarm {
+  color: white;
+  background-color: red;
+  padding: 8px;
+  margin-bottom: 8px;
+  border-radius: 10px;
+  display: none;
+}
+
+.search-box {
+  border: 1px solid skyblue;
+  margin: 16px 0px;
+  padding: 0px 12px;
+  border-radius: 10px;
+}
+
+.search-box p {
+  color: gray;
+}
