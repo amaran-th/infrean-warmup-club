@@ -1,6 +1,5 @@
 import { Octokit } from "https://esm.sh/@octokit/core";
-// import dotenv from "../../node_modules/dotenv/lib/main.d.ts";
-// dotenv.config();
+
 const resultBox = document.querySelector(".result-box");
 const profileImage = document.querySelector(".profile-image");
 const viewProfileButton = document.querySelector(".view-profile-button");
@@ -16,7 +15,7 @@ const createdAt = document.querySelector(".created-at span");
 const repoList = document.querySelector(".repos-list");
 
 const octokit = new Octokit({
-  auth: "access_token",
+  auth: process.env.GITHUB_TOKEN,
 });
 const alarm = document.querySelector(".alarm");
 
