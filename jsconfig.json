@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@octokit/core": ["node_modules/@octokit/core/dist-types/index.d.ts"]
+    }
+  }
+}

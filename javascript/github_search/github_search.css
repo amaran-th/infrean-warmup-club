@@ -51,7 +51,7 @@ footer {
 }
 
 .result-box {
-  /* display:none; */
+  display: none;
   border: 1px;
   border-radius: 10px;
   background-color: aliceblue;
