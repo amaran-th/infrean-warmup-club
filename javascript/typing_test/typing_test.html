@@ -10,13 +10,13 @@
     <header>타이핑 스피드 측정</header>
     <div class="content">
       <div class="status">
-        <div>
+        <div class="wpm_box">
           <p>WPM</p>
-          <p class="wpm">53</p>
+          <p class="wpm"></p>
         </div>
-        <div>
+        <div class="cpm_box">
           <p>CPM</p>
-          <p class="cpm">267</p>
+          <p class="cpm"></p>
         </div>
         <div>
           <p>ERRORS</p>
@@ -31,9 +31,10 @@
           <p class="accuracy">100</p>
         </div>
       </div>
-      <div class="screen">아래를 클릭해서 게임을 시작하세요.</div>
-      <input type="text" class="typing" />
+      <div class="screen"></div>
+      <input type="text" class="typing" placeholder="여기에 타이핑을 하세요." />
       <button type="button" class="retry">다시 시작</button>
     </div>
+    <script type="module" src="./typing_test.js"></script>
   </body>
 </html>
