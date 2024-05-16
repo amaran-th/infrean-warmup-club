@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Pokedex from './pages/Pokedex';
 import Chat from './pages/Chat';
+import Note from './pages/Note';
 
 const App = () => {
   return (
@@ -11,7 +12,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/pokedex" element={<Pokedex />} />
           <Route path="/chat" element={<Chat />} />
-          <Route path="/aaa" element={<Home />} />
+          <Route path="/note" element={<Note />} />
         </Routes>
       </BrowserRouter>
     </div>

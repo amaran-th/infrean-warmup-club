@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function SearchBar({ handler, setSearchValue }) {
+export default function PokemonSearchBar({ handler, setSearchValue }) {
   return (
     <div className="flex justify-center">
       <input

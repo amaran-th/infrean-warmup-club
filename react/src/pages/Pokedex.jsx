@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 import { findPokemons, searchPokemon } from '../api/pokedex';
 import PokemonCard from '../components/PokemonCard';
-import SearchBar from '../components/SearchBar';
+import PokemonSearchBar from '../components/PokemonSearchBar';
 import PokedexModal from '../components/PokemonDetail';
 
 const Pokedex = () => {
@@ -42,7 +42,7 @@ const Pokedex = () => {
     <div className="flex flex-col gap-8 p-20">
       {selectedPokemonId === 0 ? (
         <>
-          <SearchBar
+          <PokemonSearchBar
             setSearchValue={setSearchValue}
             handler={handleSearchButton}
           />

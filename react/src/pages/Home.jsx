@@ -27,12 +27,12 @@ const Home = () => {
           />
         </Link>
         <Link
-          to="/pokedex"
+          to="/note"
           className="rounded-md p-8 text-center shadow-md transition-all duration-200 hover:-translate-y-4 hover:bg-slate-50 hover:shadow-xl"
         >
-          <p className="mb-4 w-full font-bold">고민중</p>
+          <p className="mb-4 w-full font-bold">노트</p>
           <img
-            src={require('../asset/img/pokedex.png')}
+            src={require('../asset/img/note.png')}
             alt=""
             className="h-20 w-20"
           />
