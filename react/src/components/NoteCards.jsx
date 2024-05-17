@@ -1,31 +1,40 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import NoteCard from './NoteCard';
 
 export default function NoteCards({
   notes,
   keyword = null,
-  setNotes,
   tag,
   isArchived,
   isDeleted,
+  selectedSection,
 }) {
-  const notPinnedCards = notes.filter(
-    (note) =>
-      note.isArchived === isArchived &&
-      note.isDeleted === isDeleted &&
-      (tag ? note.tags.includes(tag) : true) &&
-      (keyword ? note.title.includes(tag) : true) &&
-      !note.isPinned,
-  );
-  const pinnedCards = notes.filter(
-    (note) =>
-      note.isArchived === isArchived &&
-      note.isDeleted === isDeleted &&
-      (tag ? note.tags.includes(tag) : true) &&
-      (keyword ? note.title.includes(tag) : true) &&
-      note.isPinned,
-  );
+  const [notPinnedCards, setNotPinnedCards] = useState([]);
+  const [pinnedCards, setPinnedCards] = useState([]);
+
+  useEffect(() => {
+    setNotPinnedCards(
+      notes.filter(
+        (note) =>
+          note.isArchived === isArchived &&
+          note.isDeleted === isDeleted &&
+          (tag ? note.tags.includes(tag) : true) &&
+          (keyword ? note.title.includes(keyword) : true) &&
+          !note.isPinned,
+      ),
+    );
+    setPinnedCards(
+      notes.filter(
+        (note) =>
+          note.isArchived === isArchived &&
+          note.isDeleted === isDeleted &&
+          (tag ? note.tags.includes(tag) : true) &&
+          (keyword ? note.title.includes(keyword) : true) &&
+          note.isPinned,
+      ),
+    );
+  }, [notes, keyword, selectedSection]);
   return (
     <>
       {notes.length === 0 ? (
@@ -39,12 +48,7 @@ export default function NoteCards({
               </p>
               <div className="flex flex-wrap gap-4 py-4">
                 {pinnedCards.map((note) => (
-                  <NoteCard
-                    key={note.title}
-                    notes={notes}
-                    note={note}
-                    setNotes={setNotes}
-                  />
+                  <NoteCard key={note.title} notes={notes} note={note} />
                 ))}
               </div>
             </>
@@ -58,12 +62,7 @@ export default function NoteCards({
               </p>
               <div className="flex flex-wrap gap-4 py-4">
                 {notPinnedCards.map((note) => (
-                  <NoteCard
-                    key={note.title}
-                    notes={notes}
-                    note={note}
-                    setNotes={setNotes}
-                  />
+                  <NoteCard key={note.title} notes={notes} note={note} />
                 ))}
               </div>
             </>

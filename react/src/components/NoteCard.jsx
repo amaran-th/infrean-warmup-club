@@ -1,38 +1,19 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 
-import { formatTime, sortByEditedAt } from '../utils/noteUtil';
+import { formatTime } from '../utils/noteUtil';
 import { MdPushPin } from 'react-icons/md';
-import { FiEdit } from 'react-icons/fi';
 import { HiArchiveBoxArrowDown } from 'react-icons/hi2';
 import { FaTrash } from 'react-icons/fa';
+import {
+  changePinned,
+  changeArchive,
+  deleteNote,
+} from '../redux/slice/NoteSlice';
 
 export default function NoteCard({ note, notes, setNotes }) {
-  const pinHandler = () => {
-    setNotes(
-      sortByEditedAt([
-        ...notes.filter((a) => a.title !== note.title),
-        { ...note, isPinned: !note.isPinned },
-      ]),
-    );
-  };
+  let dispatch = useDispatch();
 
-  const archiveHandler = () => {
-    setNotes(
-      sortByEditedAt([
-        ...notes.filter((a) => a.title !== note.title),
-        { ...note, isArchived: !note.isArchived },
-      ]),
-    );
-  };
-
-  const deleteHandler = () => {
-    setNotes(
-      sortByEditedAt([
-        ...notes.filter((a) => a.title !== note.title),
-        { ...note, isDeleted: !note.isDeleted },
-      ]),
-    );
-  };
   return (
     <div
       style={{ backgroundColor: note.backgroundColor }}
@@ -44,7 +25,7 @@ export default function NoteCard({ note, notes, setNotes }) {
           <span className="text-xs">{note.priority}</span>
           <MdPushPin
             className={`${note.isPinned ? 'text-red-600' : 'text-gray-400 hover:text-gray-200'}`}
-            onClick={() => pinHandler()}
+            onClick={() => dispatch(changePinned(note))}
           />
         </p>
       </div>
@@ -67,17 +48,16 @@ export default function NoteCard({ note, notes, setNotes }) {
           {formatTime(note.createdAt)}
         </p>
         <p className="flex gap-2 text-xs">
-          <FiEdit className="text-gray-400 hover:text-gray-200" />
           <HiArchiveBoxArrowDown
             className="text-gray-400 hover:text-gray-200"
             onClick={() => {
-              archiveHandler();
+              dispatch(changeArchive(note));
             }}
           />
           <FaTrash
             className="text-gray-400 hover:text-gray-200"
             onClick={() => {
-              deleteHandler();
+              dispatch(deleteNote(note));
             }}
           />
         </p>

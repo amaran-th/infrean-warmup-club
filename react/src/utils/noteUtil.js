@@ -7,11 +7,4 @@ const formatTime = (date) => {
   return `${hours}:${minutes} ${ampm}`;
 };
 
-const sortByEditedAt = (list) => {
-  return list.sort((a, b) => {
-    if (a.editedAt < b.editedAt) return 1;
-    else return -1;
-  });
-};
-
-export { formatTime, sortByEditedAt };
+export { formatTime };

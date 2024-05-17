@@ -1,12 +1,15 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+
+import { addTag } from '../../redux/slice/TagSlice';
 
 export default function TagAddModal({
   tags,
-  setTags,
   setOpenAddModal,
   currentTags,
   setCurrentTags,
 }) {
+  let dispatch = useDispatch();
   return (
     <div className="fixed flex h-full w-full items-center justify-center bg-black bg-opacity-50">
       <div className="h-64 w-80 rounded-md bg-white p-4">
@@ -19,7 +22,7 @@ export default function TagAddModal({
           placeholder="new tag..."
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
-              setTags([...tags, e.target.value]);
+              dispatch(addTag(e.target.value));
               e.target.value = '';
             }
           }}

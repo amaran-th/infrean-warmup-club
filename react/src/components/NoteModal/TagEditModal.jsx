@@ -1,6 +1,9 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 
-export default function TagEditModal({ tags, setTags, setOpenEditModal }) {
+import { addTag, deleteTag } from '../../redux/slice/TagSlice';
+export default function TagEditModal({ tags, setOpenEditModal }) {
+  let dispatch = useDispatch();
   return (
     <div className="fixed flex h-full w-full items-center justify-center bg-black bg-opacity-50">
       <div className="flex h-64 w-80 flex-col rounded-md bg-white p-4">
@@ -13,7 +16,7 @@ export default function TagEditModal({ tags, setTags, setOpenEditModal }) {
           placeholder="new tag..."
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
-              setTags([...tags, e.target.value]);
+              dispatch(addTag(e.target.value));
               e.target.value = '';
             }
           }}
@@ -23,9 +26,7 @@ export default function TagEditModal({ tags, setTags, setOpenEditModal }) {
           {tags.map((tag) => (
             <p id={tag} className="flex justify-between p-2">
               <span>{tag}</span>
-              <span onClick={() => setTags(tags.filter((a) => a !== tag))}>
-                X
-              </span>
+              <span onClick={() => dispatch(deleteTag(tag))}>X</span>
             </p>
           ))}
         </div>

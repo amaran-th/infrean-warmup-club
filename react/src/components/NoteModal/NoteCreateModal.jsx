@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import moment from 'moment';
+import { useDispatch } from 'react-redux';
 
 import './NoteCreateModal.css';
 import TagAddModal from './TagAddModal';
+import { addNote } from '../../redux/slice/NoteSlice';
 
 const colors = [
   { color: 'White', code: '#FFFFFF' },
@@ -14,19 +16,15 @@ const colors = [
   { color: 'Red', code: '#FFAAAA' },
 ];
 
-export default function NoteCreateModal({
-  tags,
-  setTags,
-  notes,
-  setNotes,
-  setOpenNoteModal,
-}) {
+export default function NoteCreateModal({ tags, setOpenNoteModal }) {
   const [currentTags, setCurrentTags] = useState([]);
   const [currentColor, setCurrentColor] = useState('#FFFFFF');
   const [currentPriority, setCurrentPriority] = useState('High');
   const [currentContent, setCurrentContent] = useState('');
   const [currentTitle, setCurrentTitle] = useState('');
   const [openAddModal, setOpenAddModal] = useState(false);
+
+  let dispatch = useDispatch();
 
   const initialize = () => {
     setCurrentColor('#FFFFFF');
@@ -114,9 +112,8 @@ export default function NoteCreateModal({
           <div className="flex justify-end">
             <button
               onClick={() => {
-                setNotes([
-                  ...notes,
-                  {
+                dispatch(
+                  addNote({
                     title: currentTitle,
                     content: currentContent,
                     isPinned: false,
@@ -124,11 +121,10 @@ export default function NoteCreateModal({
                     backgroundColor: currentColor,
                     priority: currentPriority,
                     createdAt: moment().format('yyyy-MM-DDTHH:mm:ss'),
-                    editedAt: moment().format('yyyy-MM-DDTHH:mm:ss'),
                     isArchived: false,
                     isDeleted: false,
-                  },
-                ]);
+                  }),
+                );
                 initialize();
                 setOpenNoteModal(false);
               }}
@@ -143,7 +139,6 @@ export default function NoteCreateModal({
         <TagAddModal
           setOpenAddModal={setOpenAddModal}
           tags={tags}
-          setTags={setTags}
           currentTags={currentTags}
           setCurrentTags={setCurrentTags}
         />

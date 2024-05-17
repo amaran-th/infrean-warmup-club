@@ -1,95 +1,26 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
 import NoteSideBar from '../components/NoteSideBar';
 import NoteHeader from '../components/NoteHeader';
 import NoteCards from '../components/NoteCards';
-import { sortByEditedAt } from '../utils/noteUtil';
 import NoteSearchBar from '../components/NoteSearchBar';
 import TagEditModal from '../components/NoteModal/TagEditModal';
 import NoteCreateModal from '../components/NoteModal/NoteCreateModal';
+import NoteSortModal from '../components/NoteModal/NoteSortModal';
+import { selectNote, orginizeNotes } from '../redux/slice/NoteSlice';
+import { selectTag } from '../redux/slice/TagSlice';
+
 export default function Note() {
   const [selectedSection, setSelectedSection] = useState('Notes');
-  const [tags, setTags] = useState(['tag1', 'tag2', 'tag3']);
   const [filterBy, setFilterBy] = useState('기타');
   const [keyword, setKeyword] = useState('');
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openNoteModal, setOpenNoteModal] = useState(false);
-  const [notes, setNotes] = useState(
-    sortByEditedAt([
-      {
-        title: '노트 1',
-        content: '<p>내용 1<p>',
-        isPinned: false,
-        tags: ['tag1', 'tag2'],
-        backgroundColor: '#FFAAAA',
-        priority: 'High',
-        createdAt: '2024-05-16T00:00:00',
-        editedAt: '2024-05-16T00:00:00',
-        isArchived: false,
-        isDeleted: false,
-      },
-      {
-        title: '노트 2',
-        content: '<p>내용 1<p>',
-        isPinned: false,
-        tags: ['tag1'],
-        backgroundColor: '#AAAAFF',
-        priority: 'Low',
-        createdAt: '2024-05-16T00:00:00',
-        editedAt: '2024-05-18T00:00:00',
-        isArchived: false,
-        isDeleted: false,
-      },
-      {
-        title: '노트 3',
-        content: '<p>내용 1<p>',
-        isPinned: false,
-        tags: ['tag2'],
-        backgroundColor: '#AAFAAA',
-        priority: 'Low',
-        createdAt: '2024-05-16T00:00:00',
-        editedAt: '2024-05-17T00:00:00',
-        isArchived: false,
-        isDeleted: false,
-      },
-      {
-        title: '핀',
-        content: '<p>내용 1<p>',
-        isPinned: true,
-        tags: ['tag1'],
-        backgroundColor: '#FFFFFF',
-        priority: 'High',
-        createdAt: '2024-05-16T00:00:00',
-        editedAt: '2024-05-16T00:00:00',
-        isArchived: false,
-        isDeleted: false,
-      },
-      {
-        title: '휴지통',
-        content: '<p>내용 1<p>',
-        isPinned: false,
-        tags: ['tag1'],
-        backgroundColor: '#FFFFFF',
-        priority: 'High',
-        createdAt: '2024-05-16T00:00:00',
-        editedAt: '2024-05-16T00:00:00',
-        isArchived: false,
-        isDeleted: true,
-      },
-
-      {
-        title: '아카이브',
-        content: '<p>내용 1<p>',
-        isPinned: false,
-        tags: ['tag2'],
-        backgroundColor: '#FFFFFF',
-        priority: 'High',
-        createdAt: '2024-05-16T00:00:00',
-        editedAt: '2024-05-16T00:00:00',
-        isArchived: true,
-        isDeleted: false,
-      },
-    ]),
-  );
+  const [openNoteSortModal, setOpenNoteSortModal] = useState(false);
+  const notes = useSelector(selectNote);
+  const tags = useSelector(selectTag);
+  let dispatch = useDispatch();
 
   const getCardsUi = () => {
     switch (filterBy) {
@@ -98,14 +29,17 @@ export default function Note() {
           case 'Notes':
             return (
               <>
-                <NoteSearchBar keyword={keyword} setKeyword={setKeyword} />
+                <NoteSearchBar
+                  setKeyword={setKeyword}
+                  setOpenNoteSortModal={setOpenNoteSortModal}
+                />
                 <NoteCards
                   notes={notes}
                   keyword={keyword}
-                  setNotes={setNotes}
                   tag={null}
                   isArchived={false}
                   isDeleted={false}
+                  selectedSection={selectedSection}
                 />
               </>
             );
@@ -113,20 +47,20 @@ export default function Note() {
             return (
               <NoteCards
                 notes={notes}
-                setNotes={setNotes}
                 tag={null}
                 isArchived={true}
                 isDeleted={false}
+                selectedSection={selectedSection}
               />
             );
           case 'Trash':
             return (
               <NoteCards
                 notes={notes}
-                setNotes={setNotes}
                 tag={null}
                 isArchived={false}
                 isDeleted={true}
+                selectedSection={selectedSection}
               />
             );
         }
@@ -134,53 +68,50 @@ export default function Note() {
         return (
           <NoteCards
             notes={notes}
-            setNotes={setNotes}
             tag={selectedSection}
             isArchived={false}
             isDeleted={false}
+            selectedSection={selectedSection}
           />
         );
       case '검색':
         return (
           <NoteCards
             notes={notes}
-            setNotes={setNotes}
             tag={selectedSection}
             isArchived={false}
             isDeleted={false}
+            selectedSection={selectedSection}
           />
         );
     }
   };
 
   useEffect(() => {
-    setNotes(
-      sortByEditedAt(
-        notes.map((note) => {
-          return { ...note, tags: note.tags.filter((t) => tags.includes(t)) };
-        }),
-      ),
-    );
+    dispatch(orginizeNotes(tags));
   }, [tags]);
+  useEffect(() => {}, [notes]);
 
   return (
     <>
       {openEditModal ? (
-        <TagEditModal
-          setOpenEditModal={setOpenEditModal}
-          tags={tags}
-          setTags={setTags}
-        />
+        <TagEditModal setOpenEditModal={setOpenEditModal} tags={tags} />
       ) : (
         ''
       )}
       {openNoteModal ? (
         <NoteCreateModal
           setOpenNoteModal={setOpenNoteModal}
-          setNotes={setNotes}
           notes={notes}
           tags={tags}
-          setTags={setTags}
+        />
+      ) : (
+        ''
+      )}
+      {openNoteSortModal ? (
+        <NoteSortModal
+          notes={notes}
+          setOpenNoteSortModal={setOpenNoteSortModal}
         />
       ) : (
         ''

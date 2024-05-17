@@ -5,7 +5,7 @@ import PokemonCard from '../components/PokemonCard';
 import PokemonSearchBar from '../components/PokemonSearchBar';
 import PokedexModal from '../components/PokemonDetail';
 
-const Pokedex = () => {
+export default function Pokedex() {
   const [pokemons, setPokemons] = useState([]);
   const [searchValue, setSearchValue] = useState('');
   const [offset, setOffset] = useState(0);
@@ -77,6 +77,4 @@ const Pokedex = () => {
       )}
     </div>
   );
-};
-
-export default Pokedex;
+}
