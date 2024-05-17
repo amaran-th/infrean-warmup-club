@@ -18,6 +18,7 @@ export default function Note() {
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openNoteModal, setOpenNoteModal] = useState(false);
   const [openNoteSortModal, setOpenNoteSortModal] = useState(false);
+  const [sortValue, setSortValue] = useState('');
   const notes = useSelector(selectNote);
   const tags = useSelector(selectTag);
   let dispatch = useDispatch();
@@ -40,6 +41,7 @@ export default function Note() {
                   isArchived={false}
                   isDeleted={false}
                   selectedSection={selectedSection}
+                  sortValue={sortValue}
                 />
               </>
             );
@@ -51,6 +53,7 @@ export default function Note() {
                 isArchived={true}
                 isDeleted={false}
                 selectedSection={selectedSection}
+                sortValue={sortValue}
               />
             );
           case 'Trash':
@@ -61,6 +64,7 @@ export default function Note() {
                 isArchived={false}
                 isDeleted={true}
                 selectedSection={selectedSection}
+                sortValue={sortValue}
               />
             );
         }
@@ -72,6 +76,7 @@ export default function Note() {
             isArchived={false}
             isDeleted={false}
             selectedSection={selectedSection}
+            sortValue={sortValue}
           />
         );
       case '검색':
@@ -82,6 +87,7 @@ export default function Note() {
             isArchived={false}
             isDeleted={false}
             selectedSection={selectedSection}
+            sortValue={sortValue}
           />
         );
     }
@@ -90,7 +96,6 @@ export default function Note() {
   useEffect(() => {
     dispatch(orginizeNotes(tags));
   }, [tags]);
-  useEffect(() => {}, [notes]);
 
   return (
     <>
@@ -112,6 +117,8 @@ export default function Note() {
         <NoteSortModal
           notes={notes}
           setOpenNoteSortModal={setOpenNoteSortModal}
+          sortValue={sortValue}
+          setSortValue={setSortValue}
         />
       ) : (
         ''

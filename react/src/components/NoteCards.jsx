@@ -9,6 +9,7 @@ export default function NoteCards({
   isArchived,
   isDeleted,
   selectedSection,
+  sortValue,
 }) {
   const [notPinnedCards, setNotPinnedCards] = useState([]);
   const [pinnedCards, setPinnedCards] = useState([]);
@@ -34,7 +35,7 @@ export default function NoteCards({
           note.isPinned,
       ),
     );
-  }, [notes, keyword, selectedSection]);
+  }, [notes, keyword, selectedSection, sortValue]);
   return (
     <>
       {notes.length === 0 ? (

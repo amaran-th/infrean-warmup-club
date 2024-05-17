@@ -8,20 +8,28 @@ import {
   sortPriorityLow,
 } from '../../redux/slice/NoteSlice';
 
-export default function NoteSortModal({ notes, setOpenNoteSortModal }) {
-  const [sortValue, setSortValue] = useState('');
+export default function NoteSortModal({
+  notes,
+  setOpenNoteSortModal,
+  sortValue,
+  setSortValue,
+}) {
   let dispatch = useDispatch();
 
   useEffect(() => {
     switch (sortValue) {
       case 'priority_asc':
-        dispatch(sortPriorityHigh());
+        dispatch(sortPriorityHigh(notes));
+        break;
       case 'priority_desc':
-        dispatch(sortPriorityLow());
+        dispatch(sortPriorityLow(notes));
+        break;
       case 'date_latest':
-        dispatch(sortDateLatest());
+        dispatch(sortDateLatest(notes));
+        break;
       case 'date_oldest':
-        dispatch(sortDateOldest());
+        dispatch(sortDateOldest(notes));
+        break;
     }
     console.log(notes);
   }, [sortValue]);
