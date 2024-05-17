@@ -4,6 +4,7 @@ import NoteCard from './NoteCard';
 
 export default function NoteCards({
   notes,
+  keyword = null,
   setNotes,
   tag,
   isArchived,
@@ -14,6 +15,7 @@ export default function NoteCards({
       note.isArchived === isArchived &&
       note.isDeleted === isDeleted &&
       (tag ? note.tags.includes(tag) : true) &&
+      (keyword ? note.title.includes(tag) : true) &&
       !note.isPinned,
   );
   const pinnedCards = notes.filter(
@@ -21,6 +23,7 @@ export default function NoteCards({
       note.isArchived === isArchived &&
       note.isDeleted === isDeleted &&
       (tag ? note.tags.includes(tag) : true) &&
+      (keyword ? note.title.includes(tag) : true) &&
       note.isPinned,
   );
   return (

@@ -1,10 +1,6 @@
 import React from 'react';
 
-import {
-  convertColorCode,
-  formatTime,
-  sortByEditedAt,
-} from '../utils/noteUtil';
+import { formatTime, sortByEditedAt } from '../utils/noteUtil';
 import { MdPushPin } from 'react-icons/md';
 import { FiEdit } from 'react-icons/fi';
 import { HiArchiveBoxArrowDown } from 'react-icons/hi2';
@@ -39,7 +35,7 @@ export default function NoteCard({ note, notes, setNotes }) {
   };
   return (
     <div
-      style={{ backgroundColor: convertColorCode(note.backgroundColor) }}
+      style={{ backgroundColor: note.backgroundColor }}
       className="flex h-48 w-64 flex-col rounded-md p-4 shadow-md"
     >
       <div className="flex justify-between">
@@ -52,7 +48,12 @@ export default function NoteCard({ note, notes, setNotes }) {
           />
         </p>
       </div>
-      <p className="h-full text-sm">{note.content}</p>
+      <p
+        className="h-full overflow-hidden text-sm"
+        dangerouslySetInnerHTML={{
+          __html: note.content,
+        }}
+      ></p>
       <div className="py-1">
         {note.tags.map((tag) => (
           <span className="mr-2 rounded-md bg-black bg-opacity-[10%] p-1 text-xs">

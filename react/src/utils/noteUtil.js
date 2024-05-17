@@ -1,11 +1,3 @@
-const convertColorCode = (color) => {
-  if (color === 'White') return '#FFFFFF';
-  if (color === 'Red') return '#FFAAAA';
-  if (color === 'Blue') return '#AAAAFF';
-  if (color === 'Yellow') return '#FFFFAA';
-  if (color === 'Green') return '#AAFAAA';
-};
-
 const formatTime = (date) => {
   const today = new Date(date);
   const hours = today.getHours() % 12 ? today.getHours() % 12 : 12;
@@ -22,4 +14,4 @@ const sortByEditedAt = (list) => {
   });
 };
 
-export { convertColorCode, formatTime, sortByEditedAt };
+export { formatTime, sortByEditedAt };
